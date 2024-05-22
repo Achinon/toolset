@@ -1,6 +1,6 @@
 <?php
 
-namespace Achinon;
+namespace Achinon\ToolSet;
 
 class PregChecker
 {
