@@ -1,7 +1,6 @@
 {
   "name": "achinon/toolset",
   "description": "A toolset I use for most of the projects I work on.",
-  "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
