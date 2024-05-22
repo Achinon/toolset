@@ -1,0 +1,21 @@
+{
+  "name": "achinon/toolset",
+  "description": "A toolset I use for most of the projects I work on.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Emil Gutkiewicz",
+      "email": "emil.gutkiewicz@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "EmilHondziasz\\": "src/"
+    }
+  }
+}
