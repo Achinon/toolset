@@ -103,6 +103,12 @@ class Parser
         return str_replace($string, '', $subject);
     }
 
+    function stripSpecialCharacters($string, $preserveSpaces = false) {
+        $allowedCharacters = $preserveSpaces ? 'a-zA-Z0-9\s' : 'a-zA-Z0-9';
+
+        return preg_replace("/[^$allowedCharacters]/", '', $string);
+    }
+
     /** @param string $template Write string like it should be parsed, <br/>and where the value should be, put <br/><i>__CONTENT__</i>. 'example __CONTENT__on usage' */
     public static function mapAllStringsInArray (array &$array, string $template, bool $mapKeys = false): void
     {
