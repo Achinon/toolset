@@ -103,7 +103,7 @@ class Parser
         return str_replace($string, '', $subject);
     }
 
-    function stripSpecialCharacters($string, $preserveSpaces = false) {
+    public static function stripSpecialCharacters($string, $preserveSpaces = false) {
         $allowedCharacters = $preserveSpaces ? 'a-zA-Z0-9\s' : 'a-zA-Z0-9';
 
         return preg_replace("/[^$allowedCharacters]/", '', $string);
