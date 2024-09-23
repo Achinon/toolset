@@ -4,22 +4,13 @@ namespace Achinon\ToolSet;
 
 class Queue
 {
-    /** @var array */
-    private $stack;
-    /** @var int */
-    private $l;
-    /** @var int */
-    private $p;
-
-    public function __construct()
-    {
-        $this->stack = [];
-        $this->purge();
-    }
+    private array $stack = [];
+    private int $l = 0;
+    private int $p = 0;
 
     public function enqueue($element): self
     {
-        $this->stack[$this->p++] = $element;
+        $this->setAtStack($this->p++, $element); ;
         return $this;
     }
 
@@ -32,7 +23,7 @@ class Queue
     {
         if($this->isEmpty())
             return false;
-        return $this->stack[$this->l++];
+        return $this->getStack()[$this->l++];
     }
 
     public function purge()
@@ -42,6 +33,16 @@ class Queue
 
     public function peek()
     {
-        return $this->stack[$this->l];
+        return $this->getStack()[$this->l];
+    }
+
+    protected function setAtStack(int $index, $element)
+    {
+        $this->stack[$index] = $element;
+    }
+
+    protected function getStack(): array
+    {
+        return $this->stack;
     }
 }
