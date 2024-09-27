@@ -233,4 +233,16 @@ class Parser
 
         return $data;
     }
+
+    public static function camelCaseToReadableString($input) {
+        $input = preg_replace('/[^a-zA-Z0-9]/', '', $input);
+
+        $spacedString = preg_replace('/([a-z])([A-Z])/', '$1 $2', $input);
+        return Parser::capitalize($spacedString);
+    }
+
+    public static function stripToAlphanumeric(string $string)
+    {
+        return preg_replace("/[^a-zA-Z0-9]/", "", $string);
+    }
 }
