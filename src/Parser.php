@@ -245,4 +245,29 @@ class Parser
     {
         return preg_replace("/[^a-zA-Z0-9]/", "", $string);
     }
+
+    public static function toCamelCase(string $string): string
+    {
+        $string = str_replace(['-', '_'], ' ', $string);
+        $string = str_replace(' ', '', ucwords($string));
+        return lcfirst($string);
+    }
+
+    public static function toSnakeCase(string $string): string
+    {
+        $string = preg_replace('/[^\w]/', ' ', $string);
+        return strtolower(str_replace(' ', '_', trim($string)));
+    }
+
+    public static function toKebabCase(string $string): string
+    {
+        $string = preg_replace('/[^\w]/', ' ', $string);
+        return strtolower(str_replace(' ', '-', trim($string)));
+    }
+
+    public static function toPascalCase(string $string): string
+    {
+        $string = str_replace(['-', '_'], ' ', $string);
+        return str_replace(' ', '', ucwords($string));
+    }
 }
