@@ -35,7 +35,12 @@ class Parser
             elseif ($i++ === 2){
                 $switch = true;
             }
-
+            if(is_array($k)){
+                $k = sprintf("[%s]", static::arrayToString($k, $separator, $singleSeparator, $singleSeparator));
+            }
+            if(!is_string($k)){
+                continue;
+            }
             $s .= "$k" . ($switch ? $singleSeparator : $separator);
         }
         return $s;
