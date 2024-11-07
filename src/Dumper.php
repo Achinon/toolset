@@ -59,13 +59,21 @@ class Dumper
     public static function generic(...$params): void
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 2);
-        
-        // Get the caller's file and line
-        $b = $backtrace[0];
-        $callerLine = $backtrace[1]['class'] . ":" .$backtrace[0]['line'];
-        
-        echo "Dump called at: " . $callerLine . PHP_EOL;
-        foreach ($params as $param){
+
+        $callerInfo = $backtrace[0];
+        $callerLine = $callerInfo['line'];
+
+        $callerClass = $backtrace[1]['class'] ?? null;
+        $callerFunction = $backtrace[1]['function'] ?? null;
+
+        if ($callerClass) {
+            $callerInfo = "$callerClass::$callerFunction($callerLine)";
+        } else {
+            $callerInfo = "global_scope:$callerLine";
+        }
+
+        echo "Dump called at: $callerInfo" . PHP_EOL;
+        foreach ($params as $param) {
             var_dump($param);
         }
         exit();
