@@ -47,6 +47,48 @@ class Time
         return round(self::msToHours($ms) / 24);
     }
 
+    public static function msFromYears(int $years): int
+    {
+        return $years * self::msFromDays(365); // Assuming non-leap years for simplicity
+    }
+
+    public static function msToYears(int $ms): int
+    {
+        return floor(self::msToDays($ms) / 365);
+    }
+
+    public static function msToSeconds(int $ms): int
+    {
+        return round($ms / 1000);
+    }
+
+    public static function msToHumanReadable(int $ms): string
+    {
+        $years = self::msToYears($ms);
+        $ms -= self::msFromYears($years);
+
+        $days = self::msToDays($ms);
+        $ms -= self::msFromDays($days);
+
+        $hours = self::msToHours($ms);
+        $ms -= self::msFromHours($hours);
+
+        $minutes = self::msToMinutes($ms);
+        $ms -= self::msFromMinutes($minutes);
+
+        $seconds = self::msToSeconds($ms);
+
+        // Building the output string
+        $parts = [];
+        if ($years > 0) $parts[] = "$years years";
+        if ($days > 0) $parts[] = "$days days";
+        if ($hours > 0) $parts[] = "$hours hours";
+        if ($minutes > 0) $parts[] = "$minutes minutes";
+        if ($seconds > 0) $parts[] = "$seconds seconds";
+
+        return implode(', ', $parts);
+    }
+
     /**
      * @param int $ms timestamp in milliseconds
      * @return string string of date formatted in 'd-m-Y H:i:s'
