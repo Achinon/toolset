@@ -29,11 +29,17 @@ class ClassInspector
 
         return '';
     }
-
+    
+    /**
+     * @throws \Exception
+     */
     public static function getCallingClassName(int $offset = 0): string
     {
         $trace = debug_backtrace();
-
+        
+        if(!isset($trace[1 + $offset]['class'])){
+            throw new \Exception('Offset reaches out of available bounds.');
+        }
         return $trace[1 + $offset]['class'];
     }
 
